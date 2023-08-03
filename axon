@@ -1,0 +1,59 @@
+case "$1" in
+
+# ---------------Create---------------
+   "create")
+      mkdir $2;
+      cd $2;
+      case "$3" in
+      #-----C++-----
+         "cpp")
+            touch main.cpp;
+            touch build.sh;
+            chmod +x build.sh;
+            echo "echo \"<<-COMPILING->>\";
+case \$1 in
+   a)
+      clang++ -fsanitize=address -fno-omit-frame-pointer main.cpp;;
+   m)
+      clang++ -fsanitize=memory -fPIE -pie -fno-omit-frame-pointer -fno-optimize-sibling-calls -g main.cpp;;
+   t)
+      clang++ -fsanitize=thread -fPIE -pie -g main.cpp;;
+   l)
+      clang++ -fsanitize=leak main.cpp;;
+   u)
+      clang++ -fsanitize=undefined main.cpp;;
+   *)
+      clang++ -O3 -mllvm -polly -mllvm -polly-parallel -mllvm -polly-vectorizer=stripmine -lgomp -fuse-ld=lld -std=c++20 -stdlib=libstdc++ main.cpp;;
+esac
+echo \"<<-EXECUTING->>\";
+./a.out;" > build.sh;;
+         
+      #-----Java-----
+         "java")
+            touch Main.java;
+            touch build.sh;
+            chmod +x build.sh;
+            echo "echo \"<<-COMPILING->>\";
+javac Main.java;
+echo \"<<-EXECUTING->>\";
+java Main;" > build.sh;;
+
+      #-----Python-----
+         "python")
+            touch main.py;
+            touch build.sh;
+            chmod +x build.sh;
+            echo "echo \"<<-EXECUTING->>\";
+python main.py;" > build.sh;;
+
+      #-----Invalid-----
+         *)
+            echo "Invalid Argument";;
+
+      esac;;
+
+# ---------------Build--------------- 
+   "build")
+      ./build.sh $2;;
+
+esac
