@@ -23,7 +23,7 @@ case \$1 in
    u)
       clang++ -fsanitize=undefined main.cpp;;
    *)
-      clang++ -O3 -mllvm -polly -mllvm -polly-parallel -mllvm -polly-vectorizer=stripmine -lgomp -fuse-ld=lld -std=c++20 -stdlib=libstdc++ main.cpp;;
+      clang++ -O3 -fuse-ld=lld -std=c++20 -stdlib=libstdc++ main.cpp;;
 esac
 echo \"<<-EXECUTING->>\";
 ./a.out;" > build.sh;;
