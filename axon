@@ -13,17 +13,17 @@ case "$1" in
             echo "echo \"<<-COMPILING->>\";
 case \$1 in
    a)
-      clang++ -O1 -fuse-ld=lld -std=c++20 -stdlib=libstdc++ -fsanitize=address -fno-omit-frame-pointer main.cpp;;
+      g++ -O1 -Wall -fuse-ld=lld -std=c++20 -fsanitize=address -fno-omit-frame-pointer main.cpp;;
    m)
-      clang++ -O1 -fuse-ld=lld -std=c++20 -stdlib=libstdc++ -fsanitize=memory -fPIE -pie -fno-omit-frame-pointer -fno-optimize-sibling-calls -g main.cpp;;
+      g++ -O1 -Wall -fuse-ld=lld -std=c++20 -fsanitize=memory -fPIE -pie -fno-omit-frame-pointer -fno-optimize-sibling-calls -g main.cpp;;
    t)
-      clang++ -O1 -fuse-ld=lld -std=c++20 -stdlib=libstdc++ -fsanitize=thread -fPIE -pie -g main.cpp;;
+      g++ -O1 -Wall -fuse-ld=lld -std=c++20 -fsanitize=thread -fPIE -pie -g main.cpp;;
    l)
-      clang++ -O1 -fuse-ld=lld -std=c++20 -stdlib=libstdc++ -fsanitize=leak main.cpp;;
+      g++ -O1 -Wall -fuse-ld=lld -std=c++20 -fsanitize=leak main.cpp;;
    u)
-      clang++ -O1 -fuse-ld=lld -std=c++20 -stdlib=libstdc++ -fsanitize=undefined main.cpp;;
+      g++ -O1 -Wall -fuse-ld=lld -std=c++20 -fsanitize=undefined main.cpp;;
    *)
-      clang++ -O3 -fuse-ld=lld -std=c++20 -stdlib=libstdc++ main.cpp;;
+      g++ -Ofast -Wall -fuse-ld=lld -std=c++20 main.cpp;;
 esac
 echo \"<<-EXECUTING->>\";
 ./a.out;" > build.sh;;
